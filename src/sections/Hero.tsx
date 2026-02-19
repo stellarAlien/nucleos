@@ -96,35 +96,58 @@ const Hero = () => {
         <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white to-transparent" />
       </div>
 
-      {/* Decorative Wave SVG */}
+      {/* Decorative Wave SVG - Refined to match image */}
       <svg
         ref={waveRef}
-        className="absolute bottom-0 left-0 right-0 w-full h-auto z-10"
-        viewBox="0 0 1440 320"
+        className="absolute bottom-0 left-0 right-0 w-full h-[350px] z-10"
+        viewBox="0 0 1440 350"
         preserveAspectRatio="none"
-        fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          fill="url(#waveGradient1)"
-          fillOpacity="0.3"
-        />
-        <path
-          d="M0,256L48,261.3C96,267,192,277,288,266.7C384,256,480,224,576,213.3C672,203,768,213,864,234.7C960,256,1056,288,1152,282.7C1248,277,1344,235,1392,213.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          fill="url(#waveGradient2)"
-          fillOpacity="0.5"
-        />
         <defs>
-          <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#1a2e5a" />
-            <stop offset="100%" stopColor="#0891b2" />
+          {/* Top thin yellow/green highlight layer */}
+          <linearGradient id="waveHighlight" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#D4E79E" stopOpacity="0.4" />
+            <stop offset="50%" stopColor="#5DBB8A" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#2E8FA3" stopOpacity="0.1" />
           </linearGradient>
-          <linearGradient id="waveGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#0891b2" />
-            <stop offset="100%" stopColor="#4caf50" />
+          
+          {/* Main Teal/Green gradient */}
+          <linearGradient id="waveMain" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#5DBB8A" />
+            <stop offset="40%" stopColor="#2E8FA3" />
+            <stop offset="100%" stopColor="#1E2F44" />
+          </linearGradient>
+
+          {/* Deep Navy backing */}
+          <linearGradient id="waveDeep" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#2E8FA3" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#1E2F44" stopOpacity="0.9" />
           </linearGradient>
         </defs>
+
+        {/* Deep background layer (overlaps with the bottom white) */}
+        <path
+          d="M0,350 L0,220 C300,320 600,150 900,280 C1100,360 1300,200 1440,250 L1440,350 Z"
+          fill="url(#waveDeep)"
+          fillOpacity="0.4"
+        />
+
+        {/* Mid-layer smooth wave */}
+        <path
+          d="M0,350 L0,260 C360,180 720,380 1080,260 C1260,200 1380,240 1440,280 L1440,350 Z"
+          fill="url(#waveMain)"
+          fillOpacity="0.7"
+        />
+
+        {/* Top thin highlight layer (the watercolor edge) */}
+        <path
+          d="M0,350 L0,280 C400,250 800,400 1440,220 L1440,350 Z"
+          fill="url(#waveHighlight)"
+        />
+        
+        {/* Bottom clean edge to transition into next section */}
+        <rect x="0" y="348" width="1440" height="2" fill="white" />
       </svg>
 
       {/* Content */}
@@ -141,7 +164,7 @@ const Hero = () => {
             ref={subtitleRef}
             className="text-lg sm:text-xl text-white/80 max-w-2xl mb-10 leading-relaxed"
           >
-            Expert solutions for advancing biotech and CGT initiatives. We partner with 
+            Expert solutions for advancing biotech and CGT initiatives. We partner with
             leading organizations to accelerate innovation and achieve regulatory success.
           </p>
 

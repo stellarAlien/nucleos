@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage / Corporate Overview
+       Keywords: Biotech platform Abu Dhabi, Life Sciences UAE,
+                 Masdar City Biotech, Biotech Innovation GCC -->
+  <url>
+    <loc>https://www.nucleosbiotech.com/</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nucleosbiotech.com/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nucleosbiotech.com/ar/" />
+  </url>
+
+  <!-- Mission & Vision
+       Keywords: Biotech collaboration US EU UAE, Life sciences growth GCC,
+                 Biotech convergence platform -->
+  <url>
+    <loc>https://www.nucleosbiotech.com/#about</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Advanced Training Programs
+       Keywords: CRISPR training, Stem cell workshops, Biotech regulatory access GCC,
+                 Biotech sales strategy -->
+  <url>
+    <loc>https://www.nucleosbiotech.com/#training</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Events & Industry Engagement
+       Keywords: Biotech summits UAE, Cell and gene therapy events,
+                 Drug discovery roundtables, Biotech networking -->
+  <url>
+    <loc>https://www.nucleosbiotech.com/#events</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Services / Consulting
+       Keywords: CGT consulting, Regulatory affairs UAE, Process development -->
+  <url>
+    <loc>https://www.nucleosbiotech.com/#services</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Partners -->
+  <url>
+    <loc>https://www.nucleosbiotech.com/#partners</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- News / Insights
+       Keywords: Biotech news GCC, Life sciences publications, Press releases -->
+  <url>
+    <loc>https://www.nucleosbiotech.com/#insights</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://www.nucleosbiotech.com/#contact</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

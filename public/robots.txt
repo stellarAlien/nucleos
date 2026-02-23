@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block crawling of build artifacts
+Disallow: /assets/
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Sitemap location
+Sitemap: https://www.nucleosbiotech.com/sitemap.xml

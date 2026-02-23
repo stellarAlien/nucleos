@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Dna, MapPin, Mail, Phone, Linkedin, Twitter, Facebook, Instagram, ArrowUpRight } from 'lucide-react';
+import { MapPin, Mail, Phone, Linkedin, Twitter, Facebook, Instagram, ArrowUpRight } from 'lucide-react';
+import { Logo } from '../components/Logo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -98,19 +99,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <a href="#home" className="flex items-center gap-2 mb-6">
-              <Dna className="w-10 h-10 text-brand-teal" />
-              <div className="flex flex-col">
-                <span className="font-display font-bold text-xl leading-tight text-white">
-                  NUCLEOS
-                </span>
-                <span className="text-[10px] tracking-[0.2em] leading-tight text-brand-teal">
-                  BIOTECH
-                </span>
-              </div>
+            <a href="#home" className="flex items-center gap-2 mb-6 bg-white/5 rounded-xl p-2 w-max hover:bg-white/10 transition-colors">
+              <Logo iconOnly className="h-16 w-auto object-cover" />
+              <span className="font-display font-bold text-xl leading-tight text-white ml-2">
+                NUCLEOS
+              </span>
             </a>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              Driving excellence in Cell & Gene Therapy consulting. We partner with 
+              Driving excellence in Cell & Gene Therapy consulting. We partner with
               leading biotech organizations to accelerate innovation and achieve success.
             </p>
             {/* Social Links */}

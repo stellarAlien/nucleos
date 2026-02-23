@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Calendar, GraduationCap, Microscope, ArrowUpRight, Dna, Atom } from 'lucide-react';
+import { Calendar, GraduationCap, Microscope, ArrowUpRight, Atom } from 'lucide-react';
+import { Logo } from '../components/Logo';
 import Lenis from '@studio-freight/lenis';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -163,8 +164,8 @@ const Services = () => {
       {/* Section Header */}
       <div className="relative z-10 py-20 lg:py-28 section-padding">
         <div ref={titleRef} className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-teal-100 rounded-full mb-6 shadow-sm">
-            <Dna className="w-4 h-4 text-teal-600" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-teal-100 rounded-full mb-6 shadow-sm">
+            <Logo className="h-7 w-auto" />
             <span className="text-sm font-semibold text-teal-700 tracking-wide uppercase">
               What We Offer
             </span>
@@ -294,8 +295,8 @@ const Services = () => {
           {/* End Card */}
           <div className="flex-shrink-0 w-[40vw] h-[75vh] flex items-center justify-center px-8">
             <div className="text-center max-w-md">
-              <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Dna className="w-10 h-10 text-teal-600" />
+              <div className="flex items-center justify-center mx-auto mb-6">
+                <Logo className="h-16 w-auto" />
               </div>
               <h3 className="text-3xl font-display font-bold text-slate-900 mb-4">
                 Ready to innovate?

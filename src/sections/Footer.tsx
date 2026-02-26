@@ -17,8 +17,7 @@ const quickLinks = [
 const services = [
   { label: 'Events Organization', href: '#services' },
   { label: 'Training Programs', href: '#services' },
-  { label: 'CGT Consulting', href: '#services' },
-  { label: 'Regulatory Affairs', href: '#services' },
+  { label: 'Consulting', href: '#services' },
 ];
 
 const socialLinks = [
@@ -106,7 +105,7 @@ const Footer = () => {
               </span>
             </a>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              Driving excellence in Cell & Gene Therapy consulting. We partner with
+              Driving excellence in Strategic Consultancy. We partner with
               leading biotech organizations to accelerate innovation and achieve success.
             </p>
             {/* Social Links */}
@@ -178,8 +177,7 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
                 <span className="text-slate-400 text-sm">
-                  Steigenberger Hotel Business Bay<br />
-                  Dubai, UAE
+                  Masdar City, Abu Dhabi,UAE<br />
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -194,22 +192,22 @@ const Footer = () => {
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-brand-teal flex-shrink-0" />
                 <a
-                  href="tel:+971500000000"
+                  href="tel:+971501984551"
                   className="text-slate-400 hover:text-white transition-colors duration-300 text-sm"
                 >
-                  +971 50 000 0000
+                  +971501984551
                 </a>
               </li>
             </ul>
 
             {/* CTA Button */}
-            <button
-              onClick={() => scrollToSection('#contact')}
+            <a
+              href="mailto:info@nucleos-biotech.com"
               className="mt-6 w-full px-6 py-3 bg-brand-green text-white rounded-lg font-semibold text-sm hover:bg-brand-green-600 transition-all duration-300 flex items-center justify-center gap-2 group"
             >
               Get in Touch
               <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            </a>
           </div>
         </div>
 

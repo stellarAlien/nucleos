@@ -39,7 +39,7 @@ const navLinks: NavLink[] = [
     label: 'Training',
     href: '#services',
     children: [
-      { label: 'CGT Training', href: '#services', description: 'Cell & gene therapy fundamentals' },
+      { label: 'Strategic Training', href: '#services', description: 'Cell & gene therapy fundamentals' },
       { label: 'Regulatory Workshops', href: '#services', description: 'Compliance & regulatory guidance' },
       { label: 'Certification Courses', href: '#services', description: 'Accredited professional programs' },
     ],
@@ -48,8 +48,7 @@ const navLinks: NavLink[] = [
     label: 'Consulting',
     href: '#services',
     children: [
-      { label: 'Cell & Gene Therapy', href: '#services', description: 'End-to-end CGT consultancy' },
-      { label: 'Regulatory Affairs', href: '#services', description: 'Navigate global regulations' },
+      { label: 'Strategic Consultancy', href: '#services', description: 'End-to-end CGT consultancy' },
       { label: 'Process Development', href: '#services', description: 'Manufacturing & scale-up' },
       { label: 'Market Access', href: '#services', description: 'Commercialization strategies' },
     ],
@@ -68,7 +67,6 @@ const navLinks: NavLink[] = [
 
 const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
@@ -90,10 +88,6 @@ const Navbar = () => {
       { opacity: 0, y: -10 },
       { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out', delay: 0.5 }
     );
-
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (href: string) => {
@@ -115,8 +109,7 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-xl shadow-lg py-3' : 'bg-transparent py-5'
-        }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg py-3"
     >
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="flex items-center justify-between">
@@ -128,8 +121,8 @@ const Navbar = () => {
           >
             <Logo
               className="h-8 w-auto lg:h-10 transition-all duration-300"
-              textColor={isScrolled ? '#1B3668' : '#ffffff'}
-              subTextColor={isScrolled ? '#9BA4B4' : 'rgba(255,255,255,0.8)'}
+              textColor="#1B3668"
+              subTextColor="#9BA4B4"
             />
           </a>
 
@@ -143,11 +136,10 @@ const Navbar = () => {
                   onMouseEnter={() => handleMouseEnter(link.label)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  {/* Parent item — also scrolls on click */}
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${isScrolled ? 'text-navy/70 hover:text-navy hover:bg-slate-50' : 'text-white/80 hover:text-white hover:bg-white/10'
-                      } ${openDropdown === link.label ? (isScrolled ? 'text-navy bg-slate-50' : 'text-white bg-white/10') : ''}`}
+                    className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 text-navy/70 hover:text-navy hover:bg-slate-50 ${openDropdown === link.label ? 'text-navy bg-slate-50' : ''
+                      }`}
                   >
                     {link.label}
                     <ChevronDown
@@ -155,14 +147,12 @@ const Navbar = () => {
                     />
                   </button>
 
-                  {/* Dropdown panel */}
                   <div
                     className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white rounded-2xl shadow-xl shadow-navy/10 border border-slate-100 overflow-hidden transition-all duration-200 origin-top ${openDropdown === link.label
                       ? 'opacity-100 scale-100 pointer-events-auto'
                       : 'opacity-0 scale-95 pointer-events-none'
                       }`}
                   >
-                    {/* Arrow tip */}
                     <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 bg-white border-l border-t border-slate-100" />
                     <div className="relative p-2">
                       {link.children.map((child) => (
@@ -189,8 +179,7 @@ const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
-                  className={`nav-item px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${isScrolled ? 'text-navy/70 hover:text-navy hover:bg-slate-50' : 'text-white/80 hover:text-white hover:bg-white/10'
-                    }`}
+                  className="nav-item px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 text-navy/70 hover:text-navy hover:bg-slate-50"
                 >
                   {link.label}
                 </a>
@@ -198,16 +187,11 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Desktop CTA Button - LinkedIn */}
+          {/* Desktop CTA */}
           <div className="hidden lg:block nav-item flex-shrink-0">
             <a
-              href="https://www.linkedin.com/company/nucleosbiotech/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 no-underline ${isScrolled
-                ? 'bg-brand-teal text-white hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20'
-                : 'bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20'
-                }`}
+              href="mailto:info@nucleos-biotech.com"
+              className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 no-underline bg-brand-teal text-white hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20"
             >
               Get in Touch
             </a>
@@ -216,7 +200,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden p-2 rounded-lg transition-colors duration-300 ${isScrolled ? 'text-navy' : 'text-white'}`}
+            className="lg:hidden p-2 rounded-lg transition-colors duration-300 text-navy"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -227,7 +211,7 @@ const Navbar = () => {
           className={`lg:hidden overflow-hidden transition-all duration-500 ${isMobileMenuOpen ? 'max-h-[80vh] opacity-100 mt-4' : 'max-h-0 opacity-0'
             }`}
         >
-          <div className="bg-white/97 backdrop-blur-xl rounded-2xl shadow-2xl overflow-y-auto max-h-[70vh] border border-slate-100">
+          <div className="bg-white rounded-2xl shadow-2xl overflow-y-auto max-h-[70vh] border border-slate-100">
             {navLinks.map((link) => (
               <div key={link.label} className="border-b border-slate-100 last:border-0">
                 <button
@@ -249,13 +233,12 @@ const Navbar = () => {
                   )}
                 </button>
 
-                {/* Mobile sub-items */}
                 {link.children && (
                   <div
                     className={`overflow-hidden transition-all duration-300 ${openMobileDropdown === link.label ? 'max-h-96' : 'max-h-0'
                       }`}
                   >
-                    <div className="bg-slate-50 px-4 pb-3 pt-1">
+                    <div className="bg-white px-4 pb-3 pt-1">
                       {link.children.map((child) => (
                         <button
                           key={child.label}
@@ -275,20 +258,6 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-
-            {/* Mobile CTA - LinkedIn */}
-            <div className="p-4 border-t border-slate-100">
-              <a
-                href="https://www.linkedin.com/company/nucleosbiotech/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-full px-5 py-3 rounded-xl font-semibold text-sm bg-brand-teal text-white hover:bg-teal-600 transition-all duration-300 shadow-lg shadow-teal-500/20 no-underline"
-                aria-label="Contact Nucleos Biotech on LinkedIn"
-                title="Visit our LinkedIn Page"
-              >
-                Get in Touch
-              </a>
-            </div>
           </div>
         </div>
       </div>

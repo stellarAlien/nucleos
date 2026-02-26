@@ -7,21 +7,21 @@ gsap.registerPlugin(ScrollTrigger);
 const benefits = [
   {
     id: 1,
-    title: 'Expert CGT Knowledge',
+    title: 'Expert Knowledge',
     description:
-      'Guiding your concepts through the complexity of cell & gene therapy foundations with decades of combined regulatory expertise.',
+      'Guiding organizations and researchers through advanced biotech fields, from CGT to drug discovery, with deep scientific and regulatory expertise.'
   },
   {
     id: 2,
-    title: 'Customized Approach',
+    title: 'Tailored Solutions',
     description:
-      "Expertly tailored solutions at every stage — because every organization's challenges and goals are uniquely their own.",
+      "Custom platforms, training programs, and collaborative opportunities designed to meet the unique challenges and goals of each stakeholder in the ecosystem.",
   },
   {
     id: 3,
-    title: 'Proven Results',
+    title: 'Proven Impact',
     description:
-      'Partner with our biotech team for appropriate growth strategies backed by a track record of regulatory and commercial success.',
+      'We unite science, capital, and strategy to deliver measurable innovation, foster collaborations, and drive growth across the GCC biotech landscape.',
   },
 ];
 
@@ -122,14 +122,16 @@ const WhyUs = () => {
               ref={titleRef}
               className="text-4xl md:text-6xl font-display font-bold text-[#1E2F44] mb-6 opacity-0 translate-y-10"
             >
-              Advancing Biotech and CGT Success
+              Advancing Biotech and Strategic Success
             </h2>
             <p
               ref={descRef}
               className="text-slate-500 text-lg md:text-xl max-w-2xl opacity-0 translate-y-8"
             >
-              We provide tailored solutions to drive your biotech and CGT initiatives forward, 
-              leveraging a track record of regulatory and commercial success.
+              Nucleos Biotech is the premier platform connecting researchers, startups, investors, and institutions.
+              Through curated events, specialized training, industry intelligence, and cross-border collaborations,
+              we accelerate innovation, foster strategic partnerships, and strengthen the regional biotech
+              ecosystem.
             </p>
           </header>
 

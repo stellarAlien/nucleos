@@ -1,14 +1,10 @@
 import React from 'react';
 
 interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  textColor?: string;
-  subTextColor?: string;
   iconOnly?: boolean;
 }
 
 export function Logo({
-  textColor,
-  subTextColor,
   iconOnly = false,
   className = "",
   ...props

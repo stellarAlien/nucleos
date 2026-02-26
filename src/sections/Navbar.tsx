@@ -31,7 +31,7 @@ const navLinks: NavLink[] = [
 const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
 
   const pathname = usePathname();
 
@@ -88,8 +88,6 @@ const Navbar = () => {
           >
             <Logo
               className="h-8 w-auto lg:h-10 transition-all duration-300"
-              textColor="#1B3668"
-              subTextColor="#9BA4B4"
             />
           </a>
 

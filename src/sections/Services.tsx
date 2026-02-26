@@ -248,7 +248,6 @@ const Services = () => {
                   {/* ── Popover panel ── */}
                   <div
                     id={popoverId}
-                    // @ts-expect-error
                     popover="auto"
                     onClick={(e) => {
                       // Close when clicking anywhere inside the popover

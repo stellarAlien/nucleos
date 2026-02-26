@@ -1,3 +1,5 @@
+'use client';
+
 import Navbar from '@/sections/Navbar';
 import Footer from '@/sections/Footer';
 import { Network, Building2, Users2, Rocket, Landmark, ArrowUpRight } from 'lucide-react';
@@ -69,8 +71,8 @@ export default function EcosystemPage() {
                                         key={idx}
                                         href={cat.href}
                                         className={`group p-12 rounded-[3rem] border border-slate-100 flex flex-col items-start transition-all ${isComingSoon
-                                                ? 'bg-slate-50/50 cursor-not-allowed grayscale-[0.5]'
-                                                : 'bg-white hover:shadow-2xl hover:shadow-navy/5 hover:-translate-y-1'
+                                            ? 'bg-slate-50/50 cursor-not-allowed grayscale-[0.5]'
+                                            : 'bg-white hover:shadow-2xl hover:shadow-navy/5 hover:-translate-y-1'
                                             }`}
                                         onClick={(e) => isComingSoon && e.preventDefault()}
                                     >

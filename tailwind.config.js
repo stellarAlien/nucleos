@@ -136,6 +136,15 @@ module.exports = {
           "0%, 100%": { boxShadow: "0 0 20px rgba(93, 187, 138, 0.4)" },
           "50%": { boxShadow: "0 0 40px rgba(93, 187, 138, 0.8)" },
         },
+        // ── Added for BorderBeam ────────────────────────────────────────────
+        "border-beam": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "200% 50%" },
+        },
+        "border-beam-reverse": {
+          "0%": { backgroundPosition: "200% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -143,6 +152,9 @@ module.exports = {
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         "float": "float 3s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        // ── Added for BorderBeam ────────────────────────────────────────────
+        "border-beam": "border-beam var(--duration) linear var(--delay) infinite",
+        "border-beam-reverse": "border-beam-reverse var(--duration) linear var(--delay) infinite",
       },
     },
   },

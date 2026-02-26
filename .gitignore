@@ -4,18 +4,14 @@ node_modules/
 .pnp.js
 
 # Build outputs
+.next/
 dist/
-server/
-tmp/
+out/
 *.tsbuildinfo
 
-# Qwik specific
-.cache/
-.vite/
-.vinxi/
-.output/
+# Next.js specific
 .vercel/
-.netlify/
+.turbo/
 
 # Environment variables
 .env
@@ -48,4 +44,3 @@ coverage/
 *.pem
 .eslintcache
 .stylelintcache
-.vercel

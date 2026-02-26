@@ -202,7 +202,6 @@ const Hero = () => {
     const subtitle = subtitleRef.current;
     const cta = ctaRef.current;
     const wave = waveRef.current;
-    const canvasCol = canvasColRef.current;
 
     if (!section || !headline || !subtitle || !cta || !wave) return;
 

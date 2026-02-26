@@ -44,3 +44,5 @@ coverage/
 *.pem
 .eslintcache
 .stylelintcache
+.vercel
+.env*.local

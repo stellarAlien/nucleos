@@ -7,9 +7,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Navbar from '@/sections/Navbar';
 import Hero from '@/sections/Hero';
+import WhoWeAre from '@/sections/WhoWeAre';
+import WhyTrust from '@/sections/WhyTrust';
+import OurEcosystem from '@/sections/OurEcosystem';
+import News from '@/sections/News';
 import Services from '@/sections/Services';
 import StartCollaboration from '@/sections/StartCollaboration';
-import WhyUs from '@/sections/WhyUs';
+import Newsletter from '@/sections/Newsletter';
 import Footer from '@/sections/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -54,9 +58,13 @@ export default function ClientApp() {
             <Navbar />
             <main>
                 <Hero />
+                <WhoWeAre />
+                <WhyTrust />
+                <OurEcosystem />
+                <News />
                 <Services />
                 <StartCollaboration />
-                <WhyUs />
+                <Newsletter />
             </main>
             <Footer />
         </div>

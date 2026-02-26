@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -7,17 +9,17 @@ import { Logo } from '../components/Logo';
 gsap.registerPlugin(ScrollTrigger);
 
 const quickLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Insights', href: '#insights' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/#home' },
+  { label: 'Services', href: '/#services' },
+  { label: 'About Us', href: '/about' },
+  { label: 'News', href: '/#news' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 const services = [
-  { label: 'Events Organization', href: '#services' },
-  { label: 'Training Programs', href: '#services' },
-  { label: 'Consulting', href: '#services' },
+  { label: 'Events Organization', href: '/#events' },
+  { label: 'Training Programs', href: '/#training' },
+  { label: 'Consulting', href: '/#services' },
 ];
 
 const socialLinks = [
@@ -60,10 +62,13 @@ const Footer = () => {
     return () => ctx.revert();
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (href: string) => {
+    if (href.startsWith('/#')) {
+      const targetId = href.split('#')[1];
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -135,8 +140,10 @@ const Footer = () => {
                   <a
                     href={link.href}
                     onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(link.href);
+                      if (link.href.startsWith('/#')) {
+                        e.preventDefault();
+                        handleNavClick(link.href);
+                      }
                     }}
                     className="text-slate-400 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
@@ -157,8 +164,10 @@ const Footer = () => {
                   <a
                     href={service.href}
                     onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(service.href);
+                      if (service.href.startsWith('/#')) {
+                        e.preventDefault();
+                        handleNavClick(service.href);
+                      }
                     }}
                     className="text-slate-400 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >

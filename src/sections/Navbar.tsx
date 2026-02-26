@@ -1,6 +1,9 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import { Logo } from '../components/Logo';
 
 interface SubItem {
@@ -16,53 +19,13 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { label: 'Home', href: '#home' },
-  {
-    label: 'Partners',
-    href: '#partners',
-    children: [
-      { label: 'Strategic Partners', href: '#partners', description: 'Our global strategic alliances' },
-      { label: 'Research Partners', href: '#partners', description: 'Academic & research collaborations' },
-      { label: 'Industry Partners', href: '#partners', description: 'Biotech & pharma partnerships' },
-    ],
-  },
-  {
-    label: 'Events',
-    href: '#services',
-    children: [
-      { label: 'Upcoming Events', href: '#services', description: 'Conferences & symposiums ahead' },
-      { label: 'Past Events', href: '#services', description: 'Archive of our summits' },
-      { label: 'Submit an Event', href: '#contact', description: 'Propose a new event' },
-    ],
-  },
-  {
-    label: 'Training',
-    href: '#services',
-    children: [
-      { label: 'Strategic Training', href: '#services', description: 'Cell & gene therapy fundamentals' },
-      { label: 'Regulatory Workshops', href: '#services', description: 'Compliance & regulatory guidance' },
-      { label: 'Certification Courses', href: '#services', description: 'Accredited professional programs' },
-    ],
-  },
-  {
-    label: 'Consulting',
-    href: '#services',
-    children: [
-      { label: 'Strategic Consultancy', href: '#services', description: 'End-to-end CGT consultancy' },
-      { label: 'Process Development', href: '#services', description: 'Manufacturing & scale-up' },
-      { label: 'Market Access', href: '#services', description: 'Commercialization strategies' },
-    ],
-  },
-  {
-    label: 'News',
-    href: '#insights',
-    children: [
-      { label: 'Latest News', href: '#insights', description: 'Current biotech & CGT updates' },
-      { label: 'Press Releases', href: '#insights', description: 'Official Nucleos announcements' },
-      { label: 'Publications', href: '#insights', description: 'Research & white papers' },
-    ],
-  },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/#home' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Consulting Services', href: '/#services' },
+  { label: 'Events', href: '/#events' },
+  { label: 'Training', href: '/#training' },
+  { label: 'News', href: '/news' },
+  { label: 'Our Ecosystem', href: '/ecosystem' },
 ];
 
 const Navbar = () => {
@@ -71,6 +34,8 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const nav = navRef.current;
@@ -88,13 +53,25 @@ const Navbar = () => {
       { opacity: 0, y: -10 },
       { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out', delay: 0.5 }
     );
-  }, []);
+  }, [pathname]);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
-    setIsMobileMenuOpen(false);
-    setOpenDropdown(null);
+  const isActive = (href: string) => {
+    if (href.startsWith('/#')) {
+      return pathname === '/' && (typeof window !== 'undefined' && window.location.hash === href.substring(1));
+    }
+    return pathname === href;
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('/#') && pathname === '/') {
+      e.preventDefault();
+      const targetId = href.split('#')[1];
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      setIsMobileMenuOpen(false);
+    }
   };
 
   const handleMouseEnter = (label: string) => {
@@ -115,8 +92,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a
-            href="#home"
-            onClick={(e) => { e.preventDefault(); scrollToSection('#home'); }}
+            href="/#home"
+            onClick={(e) => handleNavClick(e, '/#home')}
             className="flex items-center gap-2 nav-item flex-shrink-0"
           >
             <Logo
@@ -128,63 +105,19 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) =>
-              link.children ? (
-                <div
-                  key={link.label}
-                  className="relative nav-item"
-                  onMouseEnter={() => handleMouseEnter(link.label)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <button
-                    onClick={() => scrollToSection(link.href)}
-                    className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 text-navy/70 hover:text-navy hover:bg-slate-50 ${openDropdown === link.label ? 'text-navy bg-slate-50' : ''
-                      }`}
-                  >
-                    {link.label}
-                    <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform duration-300 ${openDropdown === link.label ? 'rotate-180' : ''}`}
-                    />
-                  </button>
-
-                  <div
-                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white rounded-2xl shadow-xl shadow-navy/10 border border-slate-100 overflow-hidden transition-all duration-200 origin-top ${openDropdown === link.label
-                      ? 'opacity-100 scale-100 pointer-events-auto'
-                      : 'opacity-0 scale-95 pointer-events-none'
-                      }`}
-                  >
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 bg-white border-l border-t border-slate-100" />
-                    <div className="relative p-2">
-                      {link.children.map((child) => (
-                        <button
-                          key={child.label}
-                          onClick={() => scrollToSection(child.href)}
-                          className="w-full text-left px-4 py-3 rounded-xl hover:bg-teal-50 group transition-colors duration-200"
-                        >
-                          <span className="block text-sm font-semibold text-navy group-hover:text-brand-teal transition-colors">
-                            {child.label}
-                          </span>
-                          {child.description && (
-                            <span className="block text-xs text-slate-400 mt-0.5 leading-snug">
-                              {child.description}
-                            </span>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
-                  className="nav-item px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 text-navy/70 hover:text-navy hover:bg-slate-50"
-                >
-                  {link.label}
-                </a>
-              )
-            )}
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`nav-item px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${isActive(link.href)
+                  ? 'text-brand-teal bg-teal-50/50'
+                  : 'text-navy/70 hover:text-navy hover:bg-slate-50'
+                  }`}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
           {/* Desktop CTA */}
@@ -214,48 +147,14 @@ const Navbar = () => {
           <div className="bg-white rounded-2xl shadow-2xl overflow-y-auto max-h-[70vh] border border-slate-100">
             {navLinks.map((link) => (
               <div key={link.label} className="border-b border-slate-100 last:border-0">
-                <button
-                  onClick={() => {
-                    if (link.children) {
-                      setOpenMobileDropdown(openMobileDropdown === link.label ? null : link.label);
-                    } else {
-                      scrollToSection(link.href);
-                    }
-                  }}
-                  className="w-full flex items-center justify-between px-6 py-4 text-navy font-semibold hover:bg-teal-50 transition-colors"
+                <a
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`w-full flex items-center justify-between px-6 py-4 font-semibold transition-colors ${isActive(link.href) ? 'text-brand-teal bg-teal-50' : 'text-navy hover:bg-teal-50'
+                    }`}
                 >
                   <span>{link.label}</span>
-                  {link.children && (
-                    <ChevronDown
-                      className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${openMobileDropdown === link.label ? 'rotate-180' : ''
-                        }`}
-                    />
-                  )}
-                </button>
-
-                {link.children && (
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${openMobileDropdown === link.label ? 'max-h-96' : 'max-h-0'
-                      }`}
-                  >
-                    <div className="bg-white px-4 pb-3 pt-1">
-                      {link.children.map((child) => (
-                        <button
-                          key={child.label}
-                          onClick={() => scrollToSection(child.href)}
-                          className="w-full text-left px-4 py-3 rounded-xl hover:bg-white group transition-colors"
-                        >
-                          <span className="block text-sm font-semibold text-navy/80 group-hover:text-brand-teal transition-colors">
-                            {child.label}
-                          </span>
-                          {child.description && (
-                            <span className="block text-xs text-slate-400 mt-0.5">{child.description}</span>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                </a>
               </div>
             ))}
           </div>

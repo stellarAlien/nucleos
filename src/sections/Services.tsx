@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -140,6 +142,8 @@ const Services = () => {
       `}</style>
 
       <section ref={sectionRef} id="services" className="relative bg-white overflow-hidden py-20 lg:py-32">
+        <div id="events" className="absolute top-0 pointer-events-none" />
+        <div id="training" className="absolute top-1/2 pointer-events-none" />
         {/* Background */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full bg-teal-50 blur-[140px] opacity-80" />

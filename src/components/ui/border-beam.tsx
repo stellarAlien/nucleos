@@ -1,105 +1,66 @@
-import { motion, MotionStyle, Transition } from "motion/react"
+"use client";
 
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-interface BorderBeamProps {
-  /**
-   * The size of the border beam.
-   */
-  size?: number
-  /**
-   * The duration of the border beam.
-   */
-  duration?: number
-  /**
-   * The delay of the border beam.
-   */
-  delay?: number
-  /**
-   * The color of the border beam from.
-   */
-  colorFrom?: string
-  /**
-   * The color of the border beam to.
-   */
-  colorTo?: string
-  /**
-   * The motion transition of the border beam.
-   */
-  transition?: Transition
-  /**
-   * The class name of the border beam.
-   */
-  className?: string
-  /**
-   * The style of the border beam.
-   */
-  style?: React.CSSProperties
-  /**
-   * Whether to reverse the animation direction.
-   */
-  reverse?: boolean
-  /**
-   * The initial offset position (0-100).
-   */
-  initialOffset?: number
-  /**
-   * The border width of the beam.
-   */
-  borderWidth?: number
+export interface BorderBeamProps extends React.HTMLAttributes<HTMLDivElement> {
+    className?: string;
+    size?: number;
+    duration?: number;
+    anchor?: number;
+    borderWidth?: number;
+    colorFrom?: string;
+    colorTo?: string;
+    delay?: number;
+    reverse?: boolean;
 }
 
-export const BorderBeam = ({
-  className,
-  size = 50,
-  delay = 0,
-  duration = 6,
-  colorFrom = "#ffaa40",
-  colorTo = "#9c40ff",
-  transition,
-  style,
-  reverse = false,
-  initialOffset = 0,
-  borderWidth = 1,
-}: BorderBeamProps) => {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 rounded-[inherit] border-(length:--border-beam-width) border-transparent mask-[linear-gradient(transparent,transparent),linear-gradient(#000,#000)] mask-intersect [mask-clip:padding-box,border-box]"
-      style={
+export const BorderBeam = React.forwardRef<HTMLDivElement, BorderBeamProps>(
+    (
         {
-          "--border-beam-width": `${borderWidth}px`,
-        } as React.CSSProperties
-      }
-    >
-      <motion.div
-        className={cn(
-          "absolute aspect-square",
-          "bg-linear-to-l from-(--color-from) via-(--color-to) to-transparent",
-          className
-        )}
-        style={
-          {
-            width: size,
-            offsetPath: `rect(0 auto auto 0 round ${size}px)`,
-            "--color-from": colorFrom,
-            "--color-to": colorTo,
-            ...style,
-          } as MotionStyle
-        }
-        initial={{ offsetDistance: `${initialOffset}%` }}
-        animate={{
-          offsetDistance: reverse
-            ? [`${100 - initialOffset}%`, `${-initialOffset}%`]
-            : [`${initialOffset}%`, `${100 + initialOffset}%`],
-        }}
-        transition={{
-          repeat: Infinity,
-          ease: "linear",
-          duration,
-          delay: -delay,
-          ...transition,
-        }}
-      />
-    </div>
-  )
-}
+            className,
+            size = 100,
+            duration = 8,
+            anchor = 90,
+            borderWidth = 1.5,
+            colorFrom = "#5DBB8A",
+            colorTo = "#D4E79E",
+            delay = 0,
+            reverse = false,
+            ...props
+        },
+        ref
+    ) => {
+        return (
+            <div
+                ref={ref}
+                style={
+                    {
+                        "--size": size,
+                        "--duration": `${duration}s`,
+                        "--anchor": `${anchor}%`,
+                        "--border-width": `${borderWidth}px`,
+                        "--color-from": colorFrom,
+                        "--color-to": colorTo,
+                        "--delay": `${delay}s`,
+                    } as React.CSSProperties
+                }
+                className={cn(
+                    "pointer-events-none absolute inset-0 rounded-[inherit] border-[var(--border-width)_solid_transparent]",
+                    // Beam gradient that moves
+                    "bg-gradient-to-r from-[var(--color-from)] via-[var(--color-to)] to-[var(--color-from)] bg-[length:200%_auto] bg-clip-border",
+                    // Mask to confine to border only
+                    "mask-clip: border-box",
+                    "mask-composite: exclude",
+                    "mask-image: linear-gradient(black, black), linear-gradient(black, black)",
+                    "animate-border-beam",
+                    reverse && "animate-[border-beam-reverse_var(--duration)_linear_var(--delay)_infinite]",
+                    className
+                )}
+                {...props}
+            />
+        );
+    }
+);
+
+BorderBeam.displayName = "BorderBeam";

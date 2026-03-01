@@ -34,7 +34,7 @@ const WhoWeAre = () => {
         <section
             ref={sectionRef}
             id="home"
-            className="relative py-20 lg:py-32 bg-white overflow-hidden"
+            className="relative py-20 lg:py-32 bg-[#F5FAF7] overflow-hidden"
         >
             <div className="container mx-auto px-6 lg:px-16">
                 <div className="max-w-4xl mx-auto text-center" ref={textRef}>
@@ -45,11 +45,11 @@ const WhoWeAre = () => {
                         </span>
                     </div>
 
-                    <h2 className="text-3xl md:text-5xl font-display font-bold text-navy mb-8 leading-tight">
+                    <h2 className="text-3xl md:text-5xl font-display font-bold text-[#1a2e22] mb-8 leading-tight">
                         A biotechnology convergence platform based in <span className="text-brand-teal">Masdar City, Abu Dhabi.</span>
                     </h2>
 
-                    <p className="text-lg md:text-xl text-slate-600 leading-relaxed text-left md:text-center italic">
+                    <p className="text-lg md:text-xl text-[#1a2e22]/70 leading-relaxed text-left md:text-center italic">
                         We connect global life sciences expertise with regional ambition across the UAE and the wider GCC
                         — fostering strategic collaboration between industry, academia, startups, and investors.
                         Operating at the intersection of biotechnology, AI, and ecosystem development, we aim to

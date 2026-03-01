@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight } from 'lucide-react';
 import * as THREE from 'three';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -332,7 +331,6 @@ const Hero = () => {
                 style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%)' }}
               />
               <span className="relative z-10 bg-gradient-to-r from-white to-white/80 bg-clip-text">Get in Touch</span>
-              <ArrowRight className="relative z-10 h-4 w-4 md:h-5 md:w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>
         </div>

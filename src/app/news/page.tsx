@@ -1,22 +1,22 @@
+import Link from "next/link";
 import Navbar from '@/sections/Navbar';
 import Footer from '@/sections/Footer';
 import { Newspaper, Bell, ArrowRight } from 'lucide-react';
+import { client } from "@/sanity/lib/client";
 
-export default function NewsPage() {
-    const newsItems = [
-        {
-            title: "Nucleos Biotech Establishes Presence in Masdar City",
-            date: "February 2026",
-            category: "Milestone",
-            description: "We are excited to announce our formal establishment in Abu Dhabi's premier innovation cluster.",
-        },
-        {
-            title: "Strategic Partnerships in the GCC Life Sciences Sector",
-            date: "January 2026",
-            category: "Strategy",
-            description: "Forging new paths for biotechnology convergence across UAE and European markets.",
-        }
-    ];
+// Professional GROQ query to match your updated schema
+const NEWS_QUERY = `*[_type == "project"] | order(publishedAt desc) {
+  _id,
+  title,
+  "slug": slug.current,
+  publishedAt,
+  summary,
+  "category": "Update" 
+}`;
+
+export default async function NewsPage() {
+    // Fetch live data from Sanity Content Lake
+    const projects = await client.fetch(NEWS_QUERY);
 
     return (
         <div className="relative min-h-screen bg-white">
@@ -36,27 +36,40 @@ export default function NewsPage() {
                         </p>
                     </header>
 
+                    {/* Dynamic Grid from Sanity */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-                        {newsItems.map((item, index) => (
-                            <div key={index} className="group p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 transition-all hover:bg-white hover:shadow-xl hover:shadow-navy/5">
+                        {projects.map((project: any) => (
+                            <Link 
+                                key={project._id} 
+                                href={`/news/${project.slug}`}
+                                className="group p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 transition-all hover:bg-white hover:shadow-xl hover:shadow-navy/5"
+                            >
                                 <div className="flex justify-between items-start mb-6">
-                                    <span className="text-sm font-bold text-brand-teal uppercase tracking-widest">{item.category}</span>
-                                    <span className="text-sm text-slate-400 font-medium">{item.date}</span>
+                                    <span className="text-sm font-bold text-brand-teal uppercase tracking-widest">
+                                        {project.category}
+                                    </span>
+                                    <span className="text-sm text-slate-400 font-medium">
+                                        {new Date(project.publishedAt).toLocaleDateString('en-US', {
+                                            month: 'long',
+                                            year: 'numeric'
+                                        })}
+                                    </span>
                                 </div>
                                 <h3 className="text-2xl font-display font-bold text-navy mb-4 group-hover:text-brand-teal transition-colors">
-                                    {item.title}
+                                    {project.title}
                                 </h3>
-                                <p className="text-slate-600 leading-relaxed mb-8">
-                                    {item.description}
+                                <p className="text-slate-600 leading-relaxed mb-8 line-clamp-3">
+                                    {project.summary}
                                 </p>
                                 <div className="flex items-center gap-2 text-navy font-bold text-sm tracking-wide group-hover:gap-3 transition-all">
                                     Read Full Update
                                     <ArrowRight className="w-4 h-4 text-brand-teal" />
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
 
+                    {/* Subscription Section */}
                     <div className="p-12 bg-navy rounded-[3rem] text-center text-white relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-teal/10 rounded-full blur-3xl -mr-32 -mt-32" />
                         <div className="relative z-10">

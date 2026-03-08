@@ -36,20 +36,47 @@ const WhoWeAre = () => {
             id="home"
             className="relative py-20 lg:py-32 bg-[#F5FAF7] overflow-hidden"
         >
-            <div className="container mx-auto px-6 lg:px-16">
+            {/* ─── Background SVG Shape ────────── */}
+            <div className="absolute top-0 right-0 w-full h-[800px] z-0 pointer-events-none opacity-60">
+                <svg
+                    viewBox="0 0 1000 800"
+                    preserveAspectRatio="none"
+                    className="w-full h-full object-cover transform -translate-y-20 scale-125"
+                >
+                    <defs>
+                        <linearGradient id="whoWaveGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#4caf50" stopOpacity="0.0" />
+                            <stop offset="50%" stopColor="#4caf50" stopOpacity="0.05" />
+                            <stop offset="80%" stopColor="#0891b2" stopOpacity="0.10" />
+                            <stop offset="100%" stopColor="#1a2e5a" stopOpacity="0.25" />
+                        </linearGradient>
+                    </defs>
+                    <path
+                        fill="url(#whoWaveGradient)"
+                        d="M 0,800 C 120,785 280,780 440,710 C 620,630 780,520 900,280 C 960,150 985,60 1000,0 L 1000,800 Z"
+                    />
+                    <path
+                        d="M 350,800 C 550,760 850,650 1000,350 L 1000,800 Z"
+                        fill="#0891b2"
+                        fillOpacity="0.06"
+                    />
+                </svg>
+            </div>
+
+            <div className="container mx-auto px-6 lg:px-16 relative z-10">
                 <div className="max-w-4xl mx-auto text-center" ref={textRef}>
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-teal-50 border border-teal-100 rounded-full mb-8 shadow-sm">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-100 rounded-full mb-8 shadow-sm">
                         <Logo className="h-6 w-auto" />
-                        <span className="text-sm font-semibold text-teal-700 tracking-wide uppercase">
+                        <span className="text-xs font-bold text-navy tracking-widest uppercase">
                             Who We Are
                         </span>
                     </div>
 
-                    <h2 className="text-3xl md:text-5xl font-display font-bold text-[#1a2e22] mb-8 leading-tight">
+                    <h2 className="text-3xl md:text-5xl font-display font-bold text-navy mb-8 leading-tight">
                         A biotechnology convergence platform based in <span className="text-brand-teal">Masdar City, Abu Dhabi.</span>
                     </h2>
 
-                    <p className="text-lg md:text-xl text-[#1a2e22]/70 leading-relaxed text-left md:text-center italic">
+                    <p className="text-lg md:text-xl text-slate-600 leading-relaxed text-left md:text-center italic">
                         We connect global life sciences expertise with regional ambition across the UAE and the wider GCC
                         — fostering strategic collaboration between industry, academia, startups, and investors.
                         Operating at the intersection of biotechnology, AI, and ecosystem development, we aim to

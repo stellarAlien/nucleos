@@ -144,46 +144,36 @@ const Services = () => {
       <section
         ref={sectionRef}
         id="services"
-        className="relative overflow-hidden py-20 lg:py-32"
-        style={{
-          background: 'linear-gradient(135deg, #0A1228 0%, #0D2137 30%, #0A3D3A 60%, #0E4A2A 80%, #1A5C1A 100%)',
-        }}
+        className="relative overflow-hidden py-20 lg:py-32 bg-[#1a2e5a]"
       >
         <div id="events" className="absolute top-0 pointer-events-none" />
         <div id="training" className="absolute top-1/2 pointer-events-none" />
 
-        {/* Background layers */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Lime green glow — top right */}
-          <div
-            className="absolute -top-32 right-0 w-[600px] h-[500px] rounded-full blur-[120px]"
-            style={{ background: 'radial-gradient(circle, rgba(168,255,62,0.18) 0%, transparent 70%)' }}
-          />
-          {/* Cyan glow — center left */}
-          <div
-            className="absolute top-1/2 -left-40 w-[500px] h-[500px] rounded-full blur-[130px]"
-            style={{ background: 'radial-gradient(circle, rgba(0,180,216,0.20) 0%, transparent 70%)' }}
-          />
-          {/* Navy deep glow — bottom */}
-          <div
-            className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-[100px]"
-            style={{ background: 'radial-gradient(circle, rgba(13,33,55,0.8) 0%, transparent 70%)' }}
-          />
-
-          {/* Dot grid */}
-          <div
-            className="absolute inset-0 opacity-[0.07]"
-            style={{
-              backgroundImage: 'radial-gradient(circle, #A8FF3E 1px, transparent 1px)',
-              backgroundSize: '28px 28px',
-            }}
-          />
-
-          {/* Bottom fade */}
-          <div
-            className="absolute bottom-0 left-0 right-0 h-40"
-            style={{ background: 'linear-gradient(to top, #0A1228, transparent)' }}
-          />
+        {/* ─── Background SVG Shape ────────── */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-80">
+          <svg
+            viewBox="0 0 1000 800"
+            preserveAspectRatio="none"
+            className="w-full h-full object-cover scale-150 transform -translate-y-20 rotate-180"
+          >
+            <defs>
+              <linearGradient id="servicesWaveGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#4caf50" stopOpacity="0.0" />
+                <stop offset="30%" stopColor="#4caf50" stopOpacity="0.2" />
+                <stop offset="60%" stopColor="#0891b2" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#1a2e5a" stopOpacity="0.85" />
+              </linearGradient>
+            </defs>
+            <path
+              fill="url(#servicesWaveGradient)"
+              d="M 0,800 C 120,785 280,780 440,710 C 620,630 780,520 900,280 C 960,150 985,60 1000,0 L 1000,800 Z"
+            />
+            <path
+              d="M 350,800 C 550,760 850,650 1000,350 L 1000,800 Z"
+              fill="#0891b2"
+              fillOpacity="0.2"
+            />
+          </svg>
         </div>
 
         <div className="relative z-10 section-padding container mx-auto">
@@ -192,8 +182,8 @@ const Services = () => {
             <div
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 shadow-sm border"
               style={{
-                background: 'rgba(168,255,62,0.08)',
-                borderColor: 'rgba(168,255,62,0.25)',
+                background: 'rgba(238, 238, 238, 0.7)',
+                borderColor: 'rgba(76,175,80,0.3)',
               }}
             >
               <Logo className="h-7 w-auto" />
@@ -233,8 +223,8 @@ const Services = () => {
                     popoverTarget={popoverId}
                     className="relative w-full h-full rounded-[2rem] overflow-hidden text-left cursor-pointer"
                     style={{
-                      border: '1px solid rgba(168,255,62,0.15)',
-                      boxShadow: '0 25px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(168,255,62,0.1)',
+                      border: '1px solid rgba(8,145,178,0.25)',
+                      boxShadow: '0 25px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(76,175,80,0.2)',
                     }}
                   >
                     {/* Image layer */}
@@ -261,8 +251,8 @@ const Services = () => {
                         <div
                           className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"
                           style={{
-                            background: 'rgba(168,255,62,0.15)',
-                            border: '1px solid rgba(168,255,62,0.35)',
+                            background: 'rgba(76,175,80,0.2)',
+                            border: '1px solid rgba(76,175,80,0.4)',
                             backdropFilter: 'blur(8px)',
                           }}
                         >
@@ -278,7 +268,7 @@ const Services = () => {
                         {service.description}
                       </p>
 
-                      <div className="w-full h-px mb-4" style={{ background: 'rgba(168,255,62,0.2)' }} />
+                      <div className="w-full h-px mb-4" style={{ background: 'rgba(8,145,178,0.3)' }} />
 
                       <div className="flex flex-wrap gap-2">
                         {service.features.map((feature, idx) => (
@@ -286,9 +276,9 @@ const Services = () => {
                             key={idx}
                             className="px-3 py-1 text-xs font-semibold rounded-full tracking-wide"
                             style={{
-                              background: 'rgba(0,180,216,0.2)',
-                              border: '1px solid rgba(0,180,216,0.35)',
-                              color: '#7EEEFF',
+                              background: 'rgba(8,145,178,0.2)',
+                              border: '1px solid rgba(8,145,178,0.4)',
+                              color: 'white',
                               backdropFilter: 'blur(4px)',
                             }}
                           >
@@ -343,8 +333,8 @@ const Services = () => {
                         <div
                           className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0"
                           style={{
-                            background: 'rgba(168,255,62,0.15)',
-                            border: '1px solid rgba(168,255,62,0.35)',
+                            background: 'rgba(76,175,80,0.2)',
+                            border: '1px solid rgba(76,175,80,0.4)',
                             backdropFilter: 'blur(8px)',
                           }}
                         >
@@ -359,7 +349,7 @@ const Services = () => {
                         {service.description}
                       </p>
 
-                      <div className="w-full h-px mb-6" style={{ background: 'rgba(168,255,62,0.2)' }} />
+                      <div className="w-full h-px mb-6" style={{ background: 'rgba(8,145,178,0.3)' }} />
 
                       <div className="flex flex-wrap gap-3">
                         {service.features.map((feature, idx) => (

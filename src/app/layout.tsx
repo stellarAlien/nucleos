@@ -28,7 +28,9 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
     },
     icons: {
-        icon: '/favicon.ico',
+        icon: '/images/cropped_circle_image.png',
+        shortcut: '/images/cropped_circle_image.png',
+        apple: '/images/cropped_circle_image.png',
     },
     robots: {
         index: true,
@@ -46,7 +48,7 @@ export default function RootLayout({
         '@type': 'Organization',
         name: 'Nucleos Biotech',
         url: 'https://nucleos-biotech.com',
-        logo: 'https://nucleos-biotech.com/images/masdar-logo-placeholder.svg', // Update to actual logo URL
+        logo: 'https://nucleos-biotech.com/images/masdar-logo-placeholder.svg',
         description: 'A biotechnology convergence platform based in Masdar City, Abu Dhabi.',
         address: {
             '@type': 'PostalAddress',
@@ -64,14 +66,25 @@ export default function RootLayout({
     };
 
     return (
-        <html lang="en">
+        <html lang="en" className="scroll-smooth">
             <head>
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </head>
-            <body>{children}</body>
+            <body className="antialiased bg-[#010308] text-white selection:bg-[#5dbb8a]/30">
+
+                {/* 2. The Content Layer 
+                  z-10 ensures content is above the DNA.
+                  relative ensures the z-index is respected.
+                */}
+                <main className="relative z-10 min-h-screen">
+                    {children}
+                </main>
+
+                {/* Optional: Add a global footer here if needed */}
+            </body>
         </html>
     );
 }

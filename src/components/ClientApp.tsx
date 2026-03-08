@@ -18,11 +18,21 @@ import Footer from '@/sections/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ClientApp() {
+// Define the shape of your Sanity posts
+interface ClientAppProps {
+    posts: {
+        _id: string;
+        title: string;
+        slug: string;
+        publishedAt: string;
+        summary: string;
+    }[];
+}
+
+export default function ClientApp({ posts }: ClientAppProps) {
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
-        // Initialize Lenis smooth scroll
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -34,8 +44,6 @@ export default function ClientApp() {
         });
 
         lenisRef.current = lenis;
-
-        // Connect Lenis to GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
 
         gsap.ticker.add((time) => {
@@ -44,7 +52,6 @@ export default function ClientApp() {
 
         gsap.ticker.lagSmoothing(0);
 
-        // Cleanup
         return () => {
             lenis.destroy();
             gsap.ticker.remove((time) => {
@@ -76,7 +83,8 @@ export default function ClientApp() {
                 <WhyTrust />
                 <WhoWeAre />
                 <OurEcosystem />
-                <News />
+                {/* PASSING THE POSTS HERE */}
+                <News posts={posts} />
                 <StartCollaboration />
                 <Newsletter />
             </main>

@@ -57,11 +57,13 @@ Please share more details about registration and availability. Thank you!`;
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 const statusStyles: Record<string, { label: string; bg: string; border: string; text: string }> = {
-  upcoming:  { label: 'Upcoming',  bg: 'rgba(46,143,163,0.15)',  border: 'rgba(46,143,163,0.35)',  text: '#2E8FA3' },
-  ongoing:   { label: 'Ongoing',   bg: 'rgba(93,187,138,0.15)',  border: 'rgba(93,187,138,0.35)',  text: '#5DBB8A' },
-  completed: { label: 'Completed'
-    , bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.12)', text: 'rgba(244,246,245,0.4)' },
-  cancelled: { label: 'Cancelled', bg: 'rgba(239,68,68,0.1)',    border: 'rgba(239,68,68,0.25)',   text: '#f87171' },
+  upcoming: { label: 'Upcoming', bg: 'rgba(46,143,163,0.15)', border: 'rgba(46,143,163,0.35)', text: '#2E8FA3' },
+  ongoing: { label: 'Ongoing', bg: 'rgba(93,187,138,0.15)', border: 'rgba(93,187,138,0.35)', text: '#5DBB8A' },
+  completed: {
+    label: 'Completed'
+    , bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.12)', text: 'rgba(244,246,245,0.4)'
+  },
+  cancelled: { label: 'Cancelled', bg: 'rgba(239,68,68,0.1)', border: 'rgba(239,68,68,0.25)', text: '#f87171' },
 };
 
 function formatDate(dt: string) {
@@ -163,11 +165,11 @@ export default async function TrainingDetail({
 
   if (!training) notFound();
 
-  const st        = statusStyles[training.status] ?? statusStyles.upcoming;
-  const coverUrl  = training.coverImage
+  const st = statusStyles[training.status] ?? statusStyles.upcoming;
+  const coverUrl = training.coverImage
     ? urlFor(training.coverImage).width(1600).height(800).auto('format').url()
     : null;
-  const photoUrl  = training.instructor?.photo
+  const photoUrl = training.instructor?.photo
     ? urlFor(training.instructor.photo).width(200).height(200).auto('format').url()
     : null;
   const whatsappUrl = makeWhatsAppUrl(training.title, training.dateFrom, training.location);
@@ -242,8 +244,8 @@ export default async function TrainingDetail({
         <svg viewBox="0 0 1000 900" preserveAspectRatio="none" className="w-full h-full">
           <defs>
             <linearGradient id="tdWave" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%"   stopColor="#5DBB8A" stopOpacity="0.0" />
-              <stop offset="40%"  stopColor="#2E8FA3" stopOpacity="0.12" />
+              <stop offset="0%" stopColor="#5DBB8A" stopOpacity="0.0" />
+              <stop offset="40%" stopColor="#2E8FA3" stopOpacity="0.12" />
               <stop offset="100%" stopColor="#0A3040" stopOpacity="0.5" />
             </linearGradient>
           </defs>

@@ -5,20 +5,6 @@ import Footer from '@/sections/Footer';
 import { notFound } from 'next/navigation';
 import ArticleContent from '@/components/ui/article-content';
 
-// Pre-build all news slugs at build time → zero runtime Sanity calls for known pages
-export async function generateStaticParams() {
-  const slugs: { slug: string }[] = await client.fetch(
-    `*[_type == "project"]{ "slug": slug.current }`,
-    {},
-    { next: { revalidate: 3600, tags: ['project'] } }
-  );
-  return slugs.map((s) => ({ slug: s.slug }));
-}
-
-// ISR fallback for newly published articles not in the build
-export const revalidate = 3600;
-export const dynamicParams = true;
-
 interface SanityImage {
   _type: 'image';
   asset: { _ref: string; _type: 'reference' };
@@ -42,8 +28,7 @@ export default async function ProjectArticle({ params }: { params: Promise<{ slu
     `*[_type == "project" && slug.current == $slug][0]{
       title, body, publishedAt, summary, category, mainImage, references
     }`,
-    { slug },
-    { next: { revalidate: 3600, tags: [`project:${slug}`, 'project'] } }
+    { slug }
   );
 
   if (!project) notFound();

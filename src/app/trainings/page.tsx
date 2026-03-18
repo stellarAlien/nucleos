@@ -37,10 +37,10 @@ interface TrainingListingItem {
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 const statusStyles: Record<string, { label: string; bg: string; border: string; text: string }> = {
-  upcoming:  { label: 'Upcoming',  bg: 'rgba(46,143,163,0.15)',  border: 'rgba(46,143,163,0.35)',  text: '#2E8FA3' },
-  ongoing:   { label: 'Ongoing',   bg: 'rgba(93,187,138,0.15)',  border: 'rgba(93,187,138,0.35)',  text: '#5DBB8A' },
+  upcoming: { label: 'Upcoming', bg: 'rgba(46,143,163,0.15)', border: 'rgba(46,143,163,0.35)', text: '#2E8FA3' },
+  ongoing: { label: 'Ongoing', bg: 'rgba(93,187,138,0.15)', border: 'rgba(93,187,138,0.35)', text: '#5DBB8A' },
   completed: { label: 'Completed', bg: 'rgba(255,255,255,0.06)', border: 'rgba(255,255,255,0.12)', text: 'rgba(244,246,245,0.4)' },
-  cancelled: { label: 'Cancelled', bg: 'rgba(239,68,68,0.1)',    border: 'rgba(239,68,68,0.25)',   text: '#f87171' },
+  cancelled: { label: 'Cancelled', bg: 'rgba(239,68,68,0.1)', border: 'rgba(239,68,68,0.25)', text: '#f87171' },
 };
 
 function formatDateRange(from: string, to: string) {
@@ -51,7 +51,7 @@ function formatDateRange(from: string, to: string) {
   const dateStr = f.toLocaleDateString('en-AE', {
     day: 'numeric', month: 'short', year: 'numeric',
   });
-  const endStr  = sameDay
+  const endStr = sameDay
     ? ''
     : ` – ${t.toLocaleDateString('en-AE', { day: 'numeric', month: 'short', year: 'numeric' })}`;
   const timeStr = `${f.toLocaleTimeString('en-AE', { hour: '2-digit', minute: '2-digit' })} – ${t.toLocaleTimeString('en-AE', { hour: '2-digit', minute: '2-digit' })}`;
@@ -133,9 +133,9 @@ export default async function TrainingPage() {
         <svg viewBox="0 0 1000 700" preserveAspectRatio="none" className="w-full h-full">
           <defs>
             <linearGradient id="trainingWaveGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%"   stopColor="#5DBB8A" stopOpacity="0.0" />
-              <stop offset="30%"  stopColor="#2E8FA3" stopOpacity="0.18" />
-              <stop offset="70%"  stopColor="#0D2D3A" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#5DBB8A" stopOpacity="0.0" />
+              <stop offset="30%" stopColor="#2E8FA3" stopOpacity="0.18" />
+              <stop offset="70%" stopColor="#0D2D3A" stopOpacity="0.4" />
               <stop offset="100%" stopColor="#061A28" stopOpacity="0.7" />
             </linearGradient>
           </defs>

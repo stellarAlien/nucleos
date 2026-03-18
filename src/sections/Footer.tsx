@@ -38,9 +38,11 @@ const socialLinks = [
   },
 ];
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 24 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as number[], delay } },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE, delay } },
 });
 
 const handleNavClick = (href: string) => {
@@ -121,7 +123,7 @@ const Footer = () => {
           className="w-full h-px mb-14 sm:mb-20"
           initial={{ scaleX: 0, opacity: 0 }}
           animate={inView ? { scaleX: 1, opacity: 1 } : {}}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, ease: EASE }}
           style={{
             background: `linear-gradient(90deg, transparent 0%, ${B.teal}60 30%, ${B.green}80 55%, ${B.teal}40 80%, transparent 100%)`,
             transformOrigin: 'left',

@@ -1,9 +1,23 @@
 import { client } from '@/sanity/lib/client';
-import imageUrlBuilder from '@sanity/image-url';
+import { urlFor } from '@/sanity/lib/image';
 import Navbar from '@/sections/Navbar';
 import Footer from '@/sections/Footer';
 import { notFound } from 'next/navigation';
 import ArticleContent from '@/components/ui/article-content';
+
+// Pre-build all news slugs at build time → zero runtime Sanity calls for known pages
+export async function generateStaticParams() {
+  const slugs: { slug: string }[] = await client.fetch(
+    `*[_type == "project"]{ "slug": slug.current }`,
+    {},
+    { next: { revalidate: 3600, tags: ['project'] } }
+  );
+  return slugs.map((s) => ({ slug: s.slug }));
+}
+
+// ISR fallback for newly published articles not in the build
+export const revalidate = 3600;
+export const dynamicParams = true;
 
 interface SanityImage {
   _type: 'image';
@@ -21,11 +35,6 @@ interface ProjectData {
   references?: { label: string; url: string }[];
 }
 
-const builder = imageUrlBuilder(client);
-function urlFor(source: SanityImage) {
-  return builder.image(source).auto('format').fit('max');
-}
-
 export default async function ProjectArticle({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
@@ -33,18 +42,19 @@ export default async function ProjectArticle({ params }: { params: Promise<{ slu
     `*[_type == "project" && slug.current == $slug][0]{
       title, body, publishedAt, summary, category, mainImage, references
     }`,
-    { slug }
+    { slug },
+    { next: { revalidate: 3600, tags: [`project:${slug}`, 'project'] } }
   );
 
   if (!project) notFound();
 
   const coverImageUrl = project.mainImage
-    ? urlFor(project.mainImage).width(1600).height(900).url()
+    ? urlFor(project.mainImage).width(1600).height(900).auto('format').url()
     : null;
 
   const body = project.body?.map((block: any) => {
     if (block._type === 'image' && block.asset) {
-      return { ...block, _imageUrl: urlFor(block as SanityImage).width(1200).url() };
+      return { ...block, _imageUrl: urlFor(block as SanityImage).width(1200).auto('format').url() };
     }
     return block;
   });

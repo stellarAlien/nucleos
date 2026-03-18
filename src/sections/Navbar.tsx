@@ -23,7 +23,7 @@ const navLinks: NavLink[] = [
   { label: 'About Us', href: '/about' },
   { label: 'Consulting Services', href: '/#services' },
   { label: 'Events', href: '/#events' },
-  { label: 'Training', href: '/#training' },
+  { label: 'Training', href: '/training' },
   { label: 'News', href: '/news' },
   { label: 'Our Ecosystem', href: '/ecosystem' },
 ];

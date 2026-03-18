@@ -3,6 +3,9 @@ import Navbar from "@/sections/Navbar";
 import Footer from "@/sections/Footer";
 import Link from "next/link";
 
+// Revalidate this page at most once per hour
+export const revalidate = 3600;
+
 // --- TYPES FOR ESLINT ---
 interface ProjectListingItem {
   _id: string;
@@ -22,7 +25,9 @@ export default async function NewsPage() {
       publishedAt,
       summary,
       category
-    }`
+    }`,
+    {},
+    { next: { revalidate: 3600, tags: ['project'] } }
   );
 
   return (

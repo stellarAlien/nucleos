@@ -10,17 +10,17 @@ import {
   Zap, Handshake, Bell, Newspaper,
 } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import type { LucideIcon } from 'lucide-react';
 
 const B = { green: '#5DBB8A', teal: '#2E8FA3', warmWhite: '#F4F6F5', navy: '#1E2F44' };
 
 type Category = 'technical' | 'partnership' | 'event' | 'news';
 
-const THEMES: Record<Category, { icon: React.ElementType; label: string; pill: string }> = {
-  technical:   { icon: Zap,       label: 'Technical Briefing',  pill: 'bg-teal-400/10 border-teal-400/30 text-teal-300' },
-  partnership: { icon: Handshake, label: 'New Partnership',     pill: 'bg-emerald-400/10 border-emerald-400/30 text-emerald-300' },
-  event:       { icon: Bell,      label: 'Event Announcement',  pill: 'bg-amber-400/10 border-amber-400/30 text-amber-300' },
-  news:        { icon: Newspaper, label: 'Industry News',       pill: 'bg-sky-400/10 border-sky-400/30 text-sky-300' },
+const THEMES: Record<Category, { icon: LucideIcon; label: string; pill: string }> = {
+  technical: { icon: Zap, label: 'Technical Briefing', pill: 'bg-teal-400/10 border-teal-400/30 text-teal-300' },
+  partnership: { icon: Handshake, label: 'New Partnership', pill: 'bg-emerald-400/10 border-emerald-400/30 text-emerald-300' },
+  event: { icon: Bell, label: 'Event Announcement', pill: 'bg-amber-400/10 border-amber-400/30 text-amber-300' },
+  news: { icon: Newspaper, label: 'Industry News', pill: 'bg-sky-400/10 border-sky-400/30 text-sky-300' },
 };
 
 type SanityImageBlock = {
@@ -41,9 +41,11 @@ export type ArticleContentProps = {
   references?: { label: string; url: string }[];
 };
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as number[], delay } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE, delay } },
 });
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
@@ -76,8 +78,8 @@ const ptComponents: PortableTextComponents = {
   },
   marks: {
     strong: ({ children }) => <strong className="font-extrabold" style={{ color: B.green }}>{children}</strong>,
-    em:     ({ children }) => <em className="italic" style={{ color: B.warmWhite }}>{children}</em>,
-    code:   ({ children }) => (
+    em: ({ children }) => <em className="italic" style={{ color: B.warmWhite }}>{children}</em>,
+    code: ({ children }) => (
       <code className="font-mono text-sm rounded px-2 py-0.5"
         style={{ background: `${B.teal}22`, border: `1px solid ${B.teal}55`, color: B.warmWhite }}>
         {children}
@@ -89,7 +91,7 @@ const ptComponents: PortableTextComponents = {
       <motion.figure className="my-12 overflow-hidden rounded-2xl border border-white/8 shadow-2xl"
         initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+        transition={{ duration: 0.6, ease: EASE }}>
         <img
           src={value._imageUrl ?? urlFor(value).width(1200).url()}
           alt={value.alt ?? 'Nucleos Research Asset'}
@@ -124,7 +126,7 @@ export default function ArticleContent({
             <motion.img
               src={coverImageUrl} alt={coverImageAlt} className="w-full h-full object-cover"
               initial={{ scale: 1.06, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.2, ease: EASE }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-[#08161F]/85 via-transparent to-[#08161F]" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#08161F] via-[#08161F]/50 to-transparent" />
@@ -146,7 +148,7 @@ export default function ArticleContent({
 
             <motion.div variants={fadeUp(0.1)} initial="hidden" animate="show">
               <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-[0.65rem] font-black uppercase tracking-[0.18em] mb-5 sm:mb-6 backdrop-blur-sm ${theme.pill}`}>
-                <CategoryIcon className="w-3 h-3" />
+                <CategoryIcon className="w-3 h-3" size={12} />
                 {theme.label}
               </div>
             </motion.div>
@@ -154,7 +156,7 @@ export default function ArticleContent({
             <motion.h1
               className="text-[2rem] sm:text-5xl lg:text-[3.5rem] font-display font-extrabold text-white leading-[1.07] mb-8 sm:mb-10 tracking-tight drop-shadow-2xl max-w-[820px]"
               initial={{ opacity: 0, y: 36 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}>
+              transition={{ duration: 0.75, ease: EASE, delay: 0.18 }}>
               {title}
             </motion.h1>
 
@@ -186,7 +188,7 @@ export default function ArticleContent({
           {summary && (
             <motion.div
               initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
+              transition={{ duration: 0.7, ease: EASE, delay: 0.45 }}
               className="mb-0"
             >
               {/* Glassmorphism card */}
@@ -244,7 +246,7 @@ export default function ArticleContent({
               style={{ borderTop: `1px solid rgba(46,143,163,0.2)` }}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, ease: EASE }}
             >
               {/* Section header */}
               <div className="flex items-center gap-3 mb-8">

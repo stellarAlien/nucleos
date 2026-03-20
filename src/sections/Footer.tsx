@@ -138,11 +138,13 @@ const Footer = () => {
             variants={fadeUp(0)} initial="hidden" animate={inView ? 'show' : 'hidden'}
             className="sm:col-span-2 lg:col-span-1"
           >
-            {/* Logo — clean, no box */}
+            {/* Logo — forced white so navy "Nucleos" text is readable on dark background */}
             <a href="/#home" className="inline-block mb-6 group" onClick={(e) => { e.preventDefault(); handleNavClick('/#home'); }}>
               <Logo
-                className="h-14 w-auto transition-all duration-300 group-hover:brightness-125"
-                style={{ filter: 'brightness(1.15) saturate(1.2)' }}
+                className="h-14 w-auto transition-all duration-300"
+                style={{
+                  filter: 'brightness(0) invert(1) drop-shadow(0 0 10px rgba(93,187,138,0.3))',
+                }}
               />
             </a>
 

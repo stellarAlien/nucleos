@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import '../index.css';
 import '../App.css';
 
@@ -53,16 +54,14 @@ export default function RootLayout({
         address: {
             '@type': 'PostalAddress',
             addressLocality: 'Masdar City, Abu Dhabi',
-            addressCountry: 'UAE'
+            addressCountry: 'UAE',
         },
         contactPoint: {
             '@type': 'ContactPoint',
             email: 'info@nucleos-biotech.com',
-            contactType: 'Customer Service'
+            contactType: 'Customer Service',
         },
-        sameAs: [
-            'https://www.linkedin.com/company/nucleosbiotech/'
-        ]
+        sameAs: ['https://www.linkedin.com/company/nucleosbiotech/'],
     };
 
     return (
@@ -75,15 +74,10 @@ export default function RootLayout({
             </head>
             <body className="antialiased bg-[#010308] text-white selection:bg-[#5dbb8a]/30">
 
-                {/* 2. The Content Layer 
-                  z-10 ensures content is above the DNA.
-                  relative ensures the z-index is respected.
-                */}
                 <main className="relative z-10 min-h-screen">
                     {children}
                 </main>
 
-                {/* Optional: Add a global footer here if needed */}
             </body>
         </html>
     );

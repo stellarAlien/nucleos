@@ -46,3 +46,6 @@ coverage/
 .stylelintcache
 .vercel
 .env*.local
+
+# HubSpot config file
+hubspot.config.yml

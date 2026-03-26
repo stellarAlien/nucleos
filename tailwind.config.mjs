@@ -126,6 +126,9 @@ export default {
                     "0%,70%,100%": { opacity: "1" },
                     "20%,50%": { opacity: "0" },
                 },
+                shimmer: {
+                    '100%': { transform: 'translateX(100%)' }
+                },
                 "float": {
                     "0%, 100%": { transform: "translateY(0px)" },
                     "50%": { transform: "translateY(-10px)" },

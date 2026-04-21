@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import '../index.css';
 import '../App.css';
-
+import { Analytics } from "@vercel/analytics/next"
 export const metadata: Metadata = {
     metadataBase: new URL('https://nucleos-biotech.com'),
     title: {
@@ -65,7 +65,7 @@ export default function RootLayout({
     };
 
     return (
-        <html lang="en" className="scroll-smooth">
+        <html lang="en" className="scroll-smooth">     
             <head>
                 <script
                     type="application/ld+json"
@@ -77,7 +77,7 @@ export default function RootLayout({
                 <main className="relative z-10 min-h-screen">
                     {children}
                 </main>
-
+                <Analytics />
             </body>
         </html>
     );

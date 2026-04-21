@@ -1,16 +1,1 @@
-{
-  "projectId": "prj_OPLsT93eYqJomDvkwzjLPmXlTtdU",
-  "orgId": "team_r30V7UmMdIiIoNebVnHs0xux",
-  "projectName": "nucleos",
-  "settings": {
-    "createdAt": 1771881188749,
-    "framework": "vite",
-    "devCommand": null,
-    "installCommand": null,
-    "buildCommand": null,
-    "outputDirectory": null,
-    "rootDirectory": null,
-    "directoryListing": false,
-    "nodeVersion": "24.x"
-  }
-}
+{"projectId":"prj_qTuycwDXIUdqsmMBYQUtKd6xNEZK","orgId":"team_r30V7UmMdIiIoNebVnHs0xux","projectName":"nucleos"}
